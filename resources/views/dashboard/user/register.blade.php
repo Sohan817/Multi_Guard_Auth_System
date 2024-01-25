@@ -17,22 +17,57 @@
                 <div class="col-md-4 offset-md-4" style="margin-top: 45px;">
                     <h4>User Register</h4>
                     <hr>
-                    <form action="">
+                    <form action="{{ route('user.create') }}" method="post" autocomplete="off">
+                        @csrf
+                        @if (Session::get('Success'))
+                            <div class="alert alert-success">
+                                {{ Session::get('Success') }}
+                            </div>
+                        @endif
+                        @if (Session::get('Failed'))
+                            <div class="alert alert-danger">
+                                {{ Session::get('Failed') }}
+                            </div>
+                        @endif
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" name="name" placeholder="Enter name">
+                            <input type="text" class="form-control" name="name" placeholder="Enter name"
+                                value="{{ old('name') }}">
+                            <span class="text-danger">
+                                @error('name')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" name="email" placeholder="Enter email address">
+                            <input type="text" class="form-control" name="email"
+                                placeholder="Enter email address"value="{{ old('email') }}">
+                            <span class="text-danger">
+                                @error('email')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" placeholder="Enter Password">
+                            <input type="password" class="form-control" name="password" placeholder="Enter Password"
+                                value="{{ old('password') }}">
+                            <span class="text-danger">
+                                @error('password')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
                         <div class="form-group">
-                            <label for="password">Confirm Password</label>
-                            <input type="password" class="form-control" name="password" placeholder="Confirm Password">
+                            <label for="cpassword">Confirm Password</label>
+                            <input type="password" class="form-control" name="cpassword" placeholder="Confirm Password"
+                                value="{{ old('cpassword') }}">
+                            <span class="text-danger">
+                                @error('cpasword')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div><br>
                         <div class="from-group">
                             <button type="submit" class="btn btn-primary">Sign Up</button>
